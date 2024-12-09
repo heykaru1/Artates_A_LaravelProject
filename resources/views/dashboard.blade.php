@@ -11,10 +11,17 @@
 
             <!-- Add Student Form -->
             <div class="mb-6">
-                @if(session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert"> 
-                    <strong class="font-bold">{{ session('success') }}</strong>
-                    <span class="block sm:inline">Student has been added successfully.</span>
+                    @if(session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <strong class="font-bold">{{ session('success') }}</strong>
+                        <span class="block sm:inline">Student has been Added successfully.</span>
+                    </div>
+                @endif
+
+                @if(session('deleted'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">{{ session('deleted') }}</strong>
+                    <span class="block sm:inline">Student has been Deleted successfully.</span>
                 </div>
             @endif
                 <div class="mb-6">
@@ -72,16 +79,16 @@
                                 <td class="py-2 border-b px-4 text-center">{{ $student->phone}}</td>
                                 <td class="py-2 border-b px-4 text-center">{{ $student->address}}</td>
                                 <td class="py-2 border-b px-4 text-center">
-                                    <a href="#" class="text-blue-500 Ohover;text-red-700">edit</a> |
+                                    <a href="{{ route('student.edit', $student->id) }}" class="text-blue-500 hover;text-red-700">edit</a> |
                                     <form method="POST" action="{{ route('student.destroy', $student->id) }}" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit">Delete</button>
+                                        <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
                                     </form>
                                 </td>
                             </tr>
-                        
-                            @endforeach 
+
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
